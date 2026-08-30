@@ -364,6 +364,46 @@ Rollin' Ace 是一款**棒球骰子网页小游戏**，核心玩法是复刻真�
 - 无 WebSocket，纯轮询
 - 局面快照兜底（防止缺帧停在旧局面）
 
+### 5.5 AI 对战（AI Duel / 智能体接入）
+
+**入口**：
+- 公开接口：`POST /api/ai`
+- 管理端：`admin/admin_ai.html`（路由 `/admin_ai`，导航「AI 管理」）
+
+**概述**：
+- 外部 AI Agent / 服务端策略程序通过公开接口接入对战房
+- 两种形态：AI vs AI 自对弈（`create`，`aiSides` 含 home+away 立即开局）；人机对战（AI `join` 真人创建的对战房，默认客队席位、客场先攻）
+- 与真人端共用同一套状态机、规则引擎与直播帧通道：AI 每步操作广播一帧，真人端实时可观战
+
+**鉴权（agent 凭证 → session_key）**：
+- 管理端「AI 管理」页创建 agent，获得 `agent_id` + `key`（**key 仅创建/重置时显示一次**，服务端只存哈希，无法再查询）
+- 换票（`session`/`create`/`join`）：`agentId` + `key`（body 或请求头 `X-Agent-Id` + `X-AI-Key`）→ 返回 session_key
+- 会话（`state`/`act`/`heartbeat`/`leave`）：session_key，与**房间 + 阵营**绑定（跨房 403 `session_mismatch`），24 小时**滑动续期**
+- 管理端支持重置 key（旧 key 立即失效）/ 停用 / 启用 / 删除 agent，并查看各 agent 分接口调用量与最近活跃时间
+
+**action 一览**：
+
+| action | 说明 |
+|---|---|
+| `session` | 为已有房间签发 / 重签 key（`side` 省略时自动挑空席，先 away 后 home） |
+| `create` | 创建 AI 对战房（`homeName`/`awayName`/`innings`/`startInning`/`aiSides`/`stream`/`liveId`） |
+| `join` | 加入真人创建的对战房（默认客队席位） |
+| `state` | 读取局面 + `allowedActions` + `toMove`/`myTurn` + `version` |
+| `act` | 执行操作（`roll`/`swing`/`read`/`take1B`/`roll2`/`item`/`setBS`/`init`） |
+| `heartbeat` | 保活（state/act 会顺带刷新在线时间） |
+| `leave` | 退出房间并撤销 key |
+
+**AI 决策循环**：
+1. `state`：`matchStatus==="live"` 且 `myTurn===true` 且 `allowedActions` 非空时才行动；`duelEnd==="half"` 时服务端正在自动换边，稍后重试
+2. `act`：按 `allowedActions` 决策（决策规则与玩家策略一致，见策略指南）
+3. 非法操作返回 `illegal_op` + `allowed`，按 `allowed` 自我纠正即可
+4. **换边与比赛结束由服务端自动推进**（`advanced`：`half`/`match`），AI 无需额外调用
+
+**注意**：
+- 规则结算由服务端权威引擎完成，AI 只负责按 `allowedActions` 决策，不要本地自行推算结果
+- 失败应答统一 `{ "ok":false, "reason":... }`（HTTP 200，仅鉴权类为 401/403），以 `ok===true` 判断成功
+- 完整接口文档见 `doc/AI_DUEL_API.md`，多语言示例见 `ra_client_api` 仓库
+
 ---
 
 ## 六、历史战绩系统
@@ -515,6 +555,8 @@ Rollin' Ace 是一款**棒球骰子网页小游戏**，核心玩法是复刻真�
 | `/api/music` | GET | BGM 下发（`?theme=classic|endless` 按场景取曲目；`&id=` 取指定曲目） |
 | `/api/tts` | GET | TTS 语音合成（探测配置状态/合成语音） |
 | `/api/teams` | GET | 队伍数据（对战大厅随机队名等） |
+| `/api/ai` | POST | AI 对战接口（公开契约：session/create/join/state/act/heartbeat/leave） |
+| `/api/admin_ai` | GET/POST | 管理端：AI agent 管理（创建/重置key/停用/启用/删除 + 调用量监控，JWT 鉴权） |
 | `/api/admin_music` | GET/POST | 管理端：曲库读取/mp3 上传/场景槽位设置/曲目删除（JWT 鉴权） |
 | `/api/admin_config` | GET/POST | 管理端：站点配置读取/保存（JWT 鉴权） |
 | `/api/admin_env` | GET | 管理端：环境变量状态 + 存储后端探测 |
@@ -543,5 +585,6 @@ Rollin' Ace 是一款**棒球骰子网页小游戏**，核心玩法是复刻真�
 | 排行榜容量 | 100 条 | 无尽模式 |
 | 对战结束自动关房 | 30 秒 | 结束后惰性触发 |
 | 速报 session_key | 24h 滑动续期 | 绑定 matchId |
+| AI 会话 key | 24h 滑动续期 | 绑定 liveId + side（跨房 403） |
 | 新用户初始赠送 | 各 3 个（环境变量可配） | 6 种道具 |
 | 失败局末奖励权重 | 盗:20 / 牺:20 / 棒:15 / 抡:15 / 雾:15 / 令:15 | 加权随机送 1 个 |
