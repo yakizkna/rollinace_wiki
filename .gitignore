@@ -1,0 +1,12 @@
+# 本地预览服务运行时文件（run.sh 生成）
+.server.pid
+.server.log
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp

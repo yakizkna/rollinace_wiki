@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Paytone+One&display=swap");
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  background: #e9f4eb;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #f4faf5 0%, #e3f0e6 55%);
+  min-height: 100vh;
+  color: #2f5d3f;
+  touch-action: manipulation;
+}
+
+/* ---------- 顶部导航 ---------- */
+.wiki-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #d7e8da;
+}
+.wiki-nav-inner {
+  max-width: 968px; margin: 0 auto; padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.wiki-logo {
+  font-family: "Paytone One", system-ui, sans-serif;
+  font-size: 18px; letter-spacing: -0.5px; color: #2d5a3d;
+  text-decoration: none; white-space: nowrap;
+}
+.wiki-logo .sub-logo {
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  color: #2d5a3d;
+  background: #e6f3e8;
+  border: 1px solid #cfe5d4;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-left: 8px;
+  vertical-align: 2px;
+}
+.wiki-links { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.wiki-link {
+  color: #3f7a54; text-decoration: none; font-size: 14px;
+  padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s;
+}
+.wiki-link:hover { background: #e6f3e8; color: #2d5a3d; }
+.wiki-link.active { background: #35a05e; color: #fff; font-weight: 600; }
+
+/* ---------- 内容区 ---------- */
+.wiki-wrap { max-width: 968px; margin: 0 auto; padding: 20px 16px 40px; }
+
+.wiki-card {
+  background: #ffffff;
+  border: 1px solid #d7e8da;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(45, 90, 61, 0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.wiki-hero { text-align: center; padding: 42px 24px 34px; }
+.wiki-hero h1 {
+  font-family: "Paytone One", system-ui, sans-serif;
+  font-size: 34px; letter-spacing: -0.5px; color: #255f3a;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8), 1px 2px 0 rgba(45,90,61,0.12);
+  margin-bottom: 12px;
+}
+.wiki-hero .lead { color: #5b8469; font-size: 15px; line-height: 1.7; max-width: 620px; margin: 0 auto; }
+
+/* 首页板块卡片 */
+.section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.section-card {
+  display: block; text-decoration: none; color: inherit;
+  background: #ffffff;
+  border: 1px solid #d7e8da;
+  border-radius: 18px; padding: 22px;
+  box-shadow: 0 8px 24px rgba(45, 90, 61, 0.08);
+  transition: transform .12s ease, box-shadow .15s ease;
+}
+.section-card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(45, 90, 61, 0.14); }
+.section-card .num {
+  font-family: "Bungee", system-ui, sans-serif;
+  font-size: 14px; color: #2f9e5e; letter-spacing: 1px; margin-bottom: 8px;
+}
+.section-card h2 { font-size: 20px; color: #2d5a3d; margin-bottom: 8px; }
+.section-card p { font-size: 13px; color: #6b8a74; line-height: 1.6; }
+.section-card .go { margin-top: 12px; color: #2f9e5e; font-size: 13px; font-weight: 600; }
+
+/* ---------- 内容页 ---------- */
+.page-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.page-head h2 { font-family: "Paytone One", system-ui, sans-serif; font-size: 26px; color: #2d5a3d; letter-spacing: -0.5px; }
+.page-head .crumb { color: #8aa894; font-size: 12px; margin-left: auto; }
+.wiki-sub { color: #6b8a74; font-size: 13px; margin-bottom: 18px; }
+
+h3.block {
+  font-size: 18px; color: #2d5a3d; margin: 24px 0 10px;
+  padding-left: 10px; border-left: 4px solid #35a05e;
+}
+h3.block:first-child { margin-top: 0; }
+h4.sub-h { font-size: 15px; color: #3f7a54; margin: 16px 0 8px; }
+
+p.text { font-size: 14px; line-height: 1.75; color: #3d5c47; margin-bottom: 10px; }
+p.text strong { color: #255f3a; }
+ul.list, ol.list { margin: 6px 0 12px 20px; }
+ul.list li, ol.list li { font-size: 14px; line-height: 1.7; color: #3d5c47; margin-bottom: 4px; }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; margin: 8px 0 14px; }
+table.wiki-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 520px; }
+.wiki-table th {
+  background: #e6f3e8; color: #2d5a3d; font-weight: 600;
+  padding: 8px 10px; text-align: left; border: 1px solid #d7e8da;
+  white-space: nowrap;
+}
+.wiki-table td {
+  padding: 8px 10px; border: 1px solid #d7e8da;
+  color: #3d5c47; line-height: 1.6;
+}
+.wiki-table tr:nth-child(even) td { background: #f4faf5; }
+.wiki-table td strong, .wiki-table td b { color: #255f3a; }
+.tag {
+  display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;
+}
+/* 与 ../rollin-ace 首页入口按钮配色统一：播=红 #e5484d / 报=绿 #4caf6e / 战=黄 #ffd23f（浅色底微调加深保证可读） */
+.tag.green { background: rgba(76,175,110,0.16); color: #1f8f4e; }
+.tag.red { background: rgba(229,72,77,0.12); color: #d93a40; }
+.tag.yellow { background: rgba(255,210,63,0.25); color: #b57f0a; }
+.tag.neutral { background: rgba(90,110,98,0.12); color: #4a5f52; }
+
+/* 提示块 */
+.note {
+  background: #fff8e1; border-left: 4px solid #e0b64a;
+  padding: 10px 14px; border-radius: 8px; font-size: 13px; color: #7a6426; line-height: 1.6; margin: 8px 0 14px;
+}
+.tip { background: #e9f6ec; border-left: 4px solid #35a05e; color: #2f5d3f; }
+.danger { background: #fdeeee; border-left: 4px solid #e5484d; color: #a03036; }
+
+/* 代码/路径 */
+.path {
+  background: #f0f7f2; border: 1px solid #d7e8da;
+  border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px; color: #1f8f4e; white-space: nowrap;
+}
+a.path {
+  display: inline-block; text-decoration: none; color: #1f8f4e;
+  transition: background .15s, color .15s, transform .12s;
+}
+a.path:hover { background: #e0f2e5; color: #176b3c; cursor: pointer; text-decoration: underline; }
+a.path:active { transform: scale(0.97); }
+code { background: #f0f7f2; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; color: #1f8f4e; }
+
+/* 决策树/流程块 */
+.pre-tree {
+  background: #f7fbf8; border: 1px solid #d7e8da; border-radius: 10px;
+  padding: 14px 16px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px; line-height: 1.8; color: #2d5a3d; white-space: pre; margin: 8px 0 14px;
+}
+
+/* 底部 */
+.wiki-foot { text-align: center; color: #6b8a74; font-size: 12px; padding: 12px 0 8px; margin-top: -20px; }
+.wiki-foot a { color: #2f9e5e; text-decoration: none; }
+
+/* 返回顶部 */
+.to-top {
+  position: fixed; right: 16px; bottom: 16px; z-index: 90;
+  width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(47,158,94,0.92); color: #fff; font-size: 18px;
+  box-shadow: 0 6px 18px rgba(45,90,61,0.2); display: none;
+}
+.to-top.show { display: block; }
