@@ -38,7 +38,7 @@
           </tbody>
         </table>
       </div>
-      <div class="note">关键结论：好坏球模式安打率最多只有普通模式的约 83%~87%，追求稳定就尽量不要开好坏球。</div>
+      <div class="note">关键结论：好坏球击中后的棒球方块更偏安打（出局 2→1，方块面 <code>1/1/2/1</code>），整体安打率/出局率与普通模式一致（选 1B 均 60% / 40%）。好坏球每打席步骤更多且有三振风险，追求稳定可不开，但不会损失安打率。</div>
       <h4 class="sub-h">期望垒数分布</h4>
       <div class="table-wrap">
         <table class="wiki-table">
@@ -67,13 +67,13 @@
       </div>
 
       <h3 class="block">3. 好坏球打席策略</h3>
-      <p class="text"><strong>最优策略：全选「打」。</strong>每球好球 +1 概率恒为 50%，全选打能最大化击中并进入主骰判定的机会，安打率最高（约 48.86%）。</p>
+      <p class="text"><strong>最优策略：全选「打」。</strong>每球好球 +1 概率恒为 50%，全选打能最大化击中并进入棒球方块判定的机会；击中后棒球方块偏安打（<code>1/1/2/1</code>），选 1B 安打率 60%，与普通模式一致。</p>
       <p class="text">技能时机：打席未开始时可用棒/雾/牺/抡；打席进行中仅可用「盗」。</p>
 
-      <h3 class="block">4. 道具使用策略</h3>
+      <h3 class="block">4. 技能道具使用策略</h3>
       <div class="table-wrap">
         <table class="wiki-table">
-          <thead><tr><th>优先级</th><th>道具</th><th>条件</th><th>期望垒数</th></tr></thead>
+          <thead><tr><th>优先级</th><th>技能道具</th><th>条件</th><th>期望垒数</th></tr></thead>
           <tbody>
             <tr><td>1</td><td><strong>棒</strong>（被动）</td><td>有必用，期望垒数翻倍</td><td><strong>1.200</strong></td></tr>
             <tr><td>2</td><td><strong>抡</strong></td><td>高风险高回报，绝境/分差大</td><td><strong>1.167</strong></td></tr>
@@ -84,9 +84,9 @@
           </tbody>
         </table>
       </div>
-      <div class="note tip">「棒」是提升最大的单一道具（期望垒数翻倍）；「令」是系列赛刷新的核心，成功即多获得 2-3 次技能机会。</div>
+      <div class="note tip">「棒」是提升最大的单一技能道具（期望垒数翻倍）；「令」是系列赛刷新的核心，成功即多获得 2-3 次技能机会。</div>
 
-      <h3 class="block">5. 垒上占垒与道具配合</h3>
+      <h3 class="block">5. 垒上占垒与技能道具配合</h3>
       <div class="table-wrap">
         <table class="wiki-table">
           <thead><tr><th>局面</th><th>推荐</th><th>思路</th></tr></thead>
@@ -98,7 +98,7 @@
           </tbody>
         </table>
       </div>
-      <h4 class="sub-h">道具组合技</h4>
+      <h4 class="sub-h">技能道具组合技</h4>
       <ul class="list">
         <li><strong>棒 + 选 1B</strong>：安打率 60% 且全部升级为二垒打，是最强被动组合。</li>
         <li><strong>棒 + 摇第二颗</strong>：安打全部升级，1B/2B/3B 对应变 2B/3B/HR。</li>
@@ -115,7 +115,7 @@
       </ul>
       <h4 class="sub-h">锦标赛（系列赛模式）</h4>
       <ul class="list">
-        <li>连续通关多场，道具<strong>跨场保留</strong>，要合理分配。</li>
+        <li>连续通关多场，技能道具<strong>跨场保留</strong>，要合理分配。</li>
         <li>「令」的刷新是系列赛核心；前几场尽量省棒/抡留给关键场次。</li>
         <li>任一场失败即系列赛结束；刷新后从已通过的最高场次继续。</li>
       </ul>
@@ -141,12 +141,12 @@
     +-- 垒上无人? --> 摇第二颗
     |
     +-- 其他 --> 选 1B</div>
-      <h4 class="sub-h">道具使用时机决策树</h4>
+      <h4 class="sub-h">技能道具使用时机决策树</h4>
       <div class="pre-tree">本局开始
     |
     +-- 有棒? --> 选中棒（被动，始终生效）
     |
-    +-- 打席未开始（plate=false）?
+    +-- 打席未开始?
     |       |
     |       +-- 三垒有人 --> 牺（66.67% 得分）
     |       |
@@ -156,7 +156,7 @@
     |       |
     |       +-- 垒上无人 --> 分差大? --> 抡（搏长打）
     |
-    +-- 打席进行中（plate=true）?
+    +-- 打席进行中?
             |
             +-- 一垒有人、二垒空? --> 有盗? --> 使用（唯一可用主动技能）</div>
     </div>
@@ -169,7 +169,7 @@
           <tbody>
             <tr><td>普通模式安打率（选 1B）</td><td>60.00%</td></tr>
             <tr><td>普通模式出局率（选 1B）</td><td>40.00%</td></tr>
-            <tr><td>好坏球安打率（全选打）</td><td>48.86%</td></tr>
+            <tr><td>好坏球安打率（全选打 + 选 1B）</td><td>60.00%（与普通模式一致）</td></tr>
             <tr><td>盗垒成功率</td><td>66.67%</td></tr>
             <tr><td>牺牲打成功率</td><td>66.67%</td></tr>
             <tr><td>抡安打率</td><td>33.33%</td></tr>

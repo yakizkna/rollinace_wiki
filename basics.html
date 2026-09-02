@@ -25,36 +25,36 @@
         <h2>基础操作介绍</h2>
         <span class="crumb">维基 · 01 入门</span>
       </div>
-      <p class="wiki-sub">从一个半局到逆转取胜——先了解每次挥棒发生了什么。核心机制：主骰 + 二选一骰的双骰博弈，加上六种道具的战术博弈。</p>
+      <p class="wiki-sub">从一个半局到逆转取胜——先了解每次挥棒发生了什么。核心机制：棒球方块 + 二选一方块的双重博弈，加上六种技能道具的战术博弈。</p>
 
-      <h3 class="block">1. 掷主骰（Roll）</h3>
-      <p class="text">点击「Roll」掷出第一颗主骰，结果由服务端按权重随机决定。</p>
+      <h3 class="block">1. 掷棒球方块（Roll）</h3>
+      <p class="text">点击「Roll」掷出棒球方块，结果由服务器随机结算，无法预判。</p>
       <div class="table-wrap">
         <table class="wiki-table">
-          <thead><tr><th>骰面</th><th>权重</th><th>结果</th></tr></thead>
+          <thead><tr><th>方块面</th><th>权重</th><th>结果</th></tr></thead>
           <tbody>
             <tr><td><span class="tag red">OUT</span> 出局</td><td>2</td><td>出局数 +1</td></tr>
-            <tr><td><span class="tag yellow">FOUL</span> 界外球</td><td>1</td><td>无影响，重新掷主骰</td></tr>
+            <tr><td><span class="tag yellow">FOUL</span> 界外球</td><td>1</td><td>无影响，重新掷棒球方块</td></tr>
             <tr><td><span class="tag green">1B</span> 一垒安打</td><td>2</td><td>打者上一垒，跑者推进 1 垒</td></tr>
             <tr><td><span class="tag yellow">1B/?</span> 模糊面</td><td>1</td><td>触发<strong>二选一</strong>决策</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="text"><strong>归一化概率</strong>（FOUL 重掷后）：OUT 40%、1B 40%、1B/? 20%。</p>
+      <p class="text"><strong>有效概率</strong>（界外球自动重掷后）：OUT 40%、1B 40%、1B/? 20%。</p>
 
       <h3 class="block">2. 二选一决策</h3>
-      <p class="text">当主骰掷出 <code>1B/?</code> 时，需从两个选项中选择：</p>
+      <p class="text">当棒球方块掷出 <code>1B/?</code> 时，需从两个选项中选择：</p>
       <h4 class="sub-h">选项 A「拿下 1B」（保守）</h4>
       <ul class="list">
         <li>直接获得一垒安打，安全上垒，安打率 60%。</li>
       </ul>
       <h4 class="sub-h">选项 B「放手一搏」（激进）</h4>
       <ul class="list">
-        <li>掷第二颗骰子，进入高风险高回报分支。</li>
+        <li>掷第二个方块，进入高风险高回报分支。</li>
       </ul>
       <div class="table-wrap">
         <table class="wiki-table">
-          <thead><tr><th>骰面</th><th>权重</th><th>结果</th></tr></thead>
+          <thead><tr><th>方块面</th><th>权重</th><th>结果</th></tr></thead>
           <tbody>
             <tr><td>DP 双杀</td><td>1</td><td>打者 + 最靠本垒跑者出局（2 出局前）；2 出局后仅打者出局</td></tr>
             <tr><td>BB 保送</td><td>1</td><td>打者上一垒，跑者推进 1 垒</td></tr>
@@ -64,15 +64,16 @@
           </tbody>
         </table>
       </div>
-      <p class="text"><strong>归一化概率</strong>：DP 16.7%、BB 16.7%、2B 33.3%、3B 16.7%、HR 16.7%。</p>
+      <p class="text"><strong>有效概率</strong>：DP 16.7%、BB 16.7%、2B 33.3%、3B 16.7%、HR 16.7%。</p>
 
       <h3 class="block">3. 好坏球打席（BS 模式）</h3>
       <p class="text">可选开关（默认关闭）。开启后每个新打席先进入好坏球阶段：</p>
       <ol class="list">
         <li>选择「打（swing）」或「看（read）」。每球无论选什么，好球 +1 的概率恒为 50%。</li>
-        <li>服务端掷好坏球骰（6 面）：<code>红中好球</code>/<code>刁钻好球</code>/<code>擦边坏球</code>/<code>偏出坏球</code>。</li>
-        <li>打席结算：好球≥3 → <span class="tag red">三振出局</span>；坏球≥4 → <span class="tag green">四坏保送</span>（打者上垒）；击中 → 自动衔接主骰掷骰；未满 → 继续选「打/看」。</li>
+        <li>掷一颗好坏球方块（6 面）：<code>红中好球</code>/<code>刁钻好球</code>/<code>擦边坏球</code>/<code>偏出坏球</code>。</li>
+        <li>打席结算：好球≥3 → <span class="tag red">三振出局</span>；坏球≥4 → <span class="tag green">四坏保送</span>（打者上垒）；击中 → 自动衔接棒球方块掷出；未满 → 继续选「打/看」。</li>
       </ol>
+      <div class="note">击中后的棒球方块与普通模式不同：好坏球打席有独立的三振出局源，为抵消该风险，击中后棒球方块<strong>出局权重由 2 调为 1</strong>，方块面为 <code>OUT×1 / FOUL×1 / 1B×2 / 1B/?×1</code>（安打面合计 3/5）。因此好坏球打席整体安打率/出局率与普通模式一致（选 1B 均为 60% / 40%）。</div>
 
       <h3 class="block">4. 过关与失败</h3>
       <div class="table-wrap">
@@ -85,38 +86,39 @@
         </table>
       </div>
 
-      <h3 class="block">5. 道具系统</h3>
+      <h3 class="block">5. 技能道具系统</h3>
       <div class="table-wrap">
         <table class="wiki-table">
-          <thead><tr><th>道具</th><th>名称</th><th>类型</th><th>描述</th></tr></thead>
+          <thead><tr><th>技能道具</th><th>类型</th><th>描述</th></tr></thead>
           <tbody>
-            <tr><td><strong>棒</strong> bat</td><td>棒</td><td>被动</td><td>安打自动升级一级（1B→2B→3B→HR）</td></tr>
-            <tr><td><strong>盗</strong> steal</td><td>盗</td><td>主动</td><td>一垒跑者盗二垒，成功×4 / 失败×2</td></tr>
-            <tr><td><strong>牺</strong> sac</td><td>牺</td><td>主动</td><td>牺牲打：垒上跑者各进一垒，打者出局，成功×4 / 失败×2</td></tr>
-            <tr><td><strong>雾</strong> mist</td><td>雾</td><td>主动</td><td>防守失误，随机发生捕逸/暴传/暴投/无事/Nice Play</td></tr>
-            <tr><td><strong>抡</strong> lun</td><td>抡</td><td>主动</td><td>盲炮选手，高风险大回报（OUT×4 / 三垒打×1 / 本垒打×1）</td></tr>
-            <tr><td><strong>令</strong> ling</td><td>令</td><td>主动</td><td>传令：成功则重置本局技能使用次数（成功×3 / 失败×3）</td></tr>
+            <tr><td><strong>棒</strong></td><td>被动</td><td>安打自动升级一级（1B→2B→3B→HR）</td></tr>
+            <tr><td><strong>盗</strong></td><td>主动</td><td>一垒跑者盗二垒，成功×4 / 失败×2</td></tr>
+            <tr><td><strong>牺</strong></td><td>主动</td><td>牺牲打：垒上跑者各进一垒，打者出局，成功×4 / 失败×2</td></tr>
+            <tr><td><strong>雾</strong></td><td>主动</td><td>防守失误，随机发生捕逸/暴传/暴投/无事/Nice Play</td></tr>
+            <tr><td><strong>抡</strong></td><td>主动</td><td>盲炮选手，高风险大回报（OUT×4 / 三垒打×1 / 本垒打×1）</td></tr>
+            <tr><td><strong>令</strong></td><td>主动</td><td>传令：成功则重置本局技能使用次数（成功×3 / 失败×3）</td></tr>
           </tbody>
         </table>
       </div>
       <h4 class="sub-h">使用规则</h4>
       <ul class="list">
         <li>每局最多使用 <strong>3 个技能</strong>，同种技能本局不能重复使用。</li>
-        <li>「令」成功后重置使用次数为 3 并清空已用集合，所有道具恢复可用。</li>
-        <li>背包上限：每种道具最多 20 个，总上限 120 个。</li>
+        <li>「令」成功后本局技能使用次数恢复为 3，所有技能道具重新可用。</li>
+        <li>背包上限：每种技能道具最多 20 个，总上限 120 个。</li>
       </ul>
-      <div class="note tip">新手提示：新用户初始各赠送 3 个道具；通关、再见本垒打、普通本垒打、失败局末均有概率获得道具。见下方「获取途径」。</div>
+      <div class="note tip">新手提示：新用户初始各赠送 3 个技能道具；通关、再见本垒打、普通本垒打、失败局末均有概率获得技能道具。见下方「获取途径」。</div>
 
-      <h3 class="block">6. 道具获取途径</h3>
+      <h3 class="block">6. 技能道具获取途径</h3>
       <div class="table-wrap">
         <table class="wiki-table">
           <thead><tr><th>途径</th><th>奖励</th></tr></thead>
           <tbody>
-            <tr><td>新用户初始赠送</td><td>各 3 个（由环境变量控制）</td></tr>
+            <tr><td>新用户初始赠送</td><td>各 3 个</td></tr>
             <tr><td>普通通关（逆转成功）</td><td>6 选 4，各 1 个</td></tr>
+            <tr><td>锦标赛各轮过关</td><td>每轮按关卡配置发放</td></tr>
             <tr><td>再见本垒打（HR 且过关）</td><td>棒 3 / 抡 3 / 盗 2 / 牺 2 / 雾 2 / 令 2</td></tr>
             <tr><td>单独本垒打（未过关）</td><td>棒 2 / 抡 2</td></tr>
-            <tr><td>3 OUT 局末（失败）</td><td>加权随机送 1 个（盗/牺各 20%、棒/抡/雾/令各 15%）</td></tr>
+            <tr><td>3 OUT 局末（失败）</td><td>按概率随机送 1 个（盗/牺各 20%、棒/抡/雾/令各 15%）</td></tr>
           </tbody>
         </table>
       </div>

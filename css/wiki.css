@@ -147,12 +147,17 @@ table.wiki-table { width: 100%; border-collapse: collapse; font-size: 13px; min-
   border-radius: 6px; padding: 1px 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12.5px; color: #1f8f4e; white-space: nowrap;
 }
-a.path {
-  display: inline-block; text-decoration: none; color: #1f8f4e;
-  transition: background .15s, color .15s, transform .12s;
+a.path { display: inline-block; text-decoration: none; color: #1f8f4e; }
+a.path:hover { color: #176b3c; text-decoration: underline; }
+/* 访问按钮（导航表） */
+.btn {
+  display: inline-block; padding: 4px 14px; border-radius: 8px;
+  background: #1f8f4e; color: #fff; font-size: 13px; font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  transition: background .15s, transform .12s;
 }
-a.path:hover { background: #e0f2e5; color: #176b3c; cursor: pointer; text-decoration: underline; }
-a.path:active { transform: scale(0.97); }
+.btn:hover { background: #187a42; }
+.btn:active { transform: scale(0.97); }
 code { background: #f0f7f2; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; color: #1f8f4e; }
 
 /* 决策树/流程块 */
