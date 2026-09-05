@@ -5,7 +5,7 @@ Rollin' Ace（棒球骰子小游戏）的官方维基站点。汇总了游戏的
 ## 目录结构
 
 ```
-rollin_wiki/
+rollinace_wiki/
 ├── index.html      # 首页：站点简介 + 三大板块导航
 ├── basics.html     # 01 · 基础操作介绍
 ├── strategy.html   # 02 · 游戏策略玩法
@@ -47,7 +47,7 @@ npx http-server -p 8091
 
 本项目为独立 EdgeOne Pages 静态站点：
 
-1. 将 `rollin_wiki` 目录内容上传为新的 EdgeOne Pages 项目。
+1. 将 `rollinace_wiki` 目录内容上传为新的 EdgeOne Pages 项目。
 2. `edgeone.json` 已配置 `/`、`/basics`、`/strategy`、`/nav` 的 `rewrites`：
    - `/basics` → `basics.html`
    - `/strategy` → `strategy.html`
