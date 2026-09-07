@@ -67,8 +67,29 @@
       </div>
 
       <h3 class="block">3. 好坏球打席策略</h3>
-      <p class="text"><strong>最优策略：全选「打」。</strong>每球好球 +1 概率恒为 50%，全选打能最大化击中并进入棒球方块判定的机会；击中后棒球方块偏安打（<code>1/1/2/1</code>），选 1B 安打率 60%，与普通模式一致。</p>
+      <p class="text"><strong>进攻默认：全选「打」。</strong>击中后棒球方块偏安打（<code>1/1/2/1</code>），选 1B 安打率 60%；「每球好球 +1 恒为 50%」仅在对手投手档位为均衡时成立。</p>
       <p class="text">技能时机：打席未开始时可用棒/雾/牺/抡；打席进行中仅可用「盗」。</p>
+
+      <h4 class="sub-h">投手档位 × 单球概率</h4>
+      <p class="text">防守方「选择投球策略」五档决定好坏球骰面分布，直接改变单球「打出击中率 / 看对率」：</p>
+      <div class="table-wrap">
+        <table class="wiki-table">
+          <thead><tr><th>档位</th><th>选「打」击中率</th><th>选「看」看对率</th><th>防守收益</th></tr></thead>
+          <tbody>
+            <tr><td><strong>极偏坏</strong></td><td>16.7%</td><td>83.3%</td><td>诱打挥空 · 双刃剑（易送保送）</td></tr>
+            <tr><td><strong>偏坏球</strong></td><td>33.3%</td><td>66.7%</td><td>惩罚乱打</td></tr>
+            <tr><td><strong>均衡</strong>（默认）</td><td>50.0%</td><td>50.0%</td><td>中性稳妥</td></tr>
+            <tr><td><strong>偏好球</strong></td><td>66.7%</td><td>33.3%</td><td>惩罚等球</td></tr>
+            <tr><td><strong>极偏好</strong></td><td>83.3%</td><td>16.7%</td><td>极端三振向</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4 class="sub-h">攻防应对</h4>
+      <ul class="list">
+        <li><strong>进攻读档</strong>：对手多坏球档（偏坏球/极偏坏）→ 多「看」搏坏球逼近保送；对手多好球档（偏好球/极偏好）→ 多「打」吃红中面。硬规则不变：两好球必打、满垒三坏必看。</li>
+        <li><strong>防守选档</strong>：看对方习惯回显——对方爱打（swing 多）→ 上偏坏球档让它挥空；对方爱等（read 多）→ 上偏好球档让等球变好球，快速压到三振；摸不清用均衡。</li>
+        <li><strong>对战 AI</strong>：防守 AI 会参考你本场打/看习惯针对性选档（swing 多→偏坏球、read 多→偏好球）；AI 判定前有约 5 秒「思考」。</li>
+      </ul>
 
       <h3 class="block">4. 技能道具使用策略</h3>
       <div class="table-wrap">

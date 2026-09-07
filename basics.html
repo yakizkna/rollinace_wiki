@@ -75,6 +75,29 @@
       </ol>
       <div class="note">击中后的棒球方块与普通模式不同：好坏球打席有独立的三振出局源，为抵消该风险，击中后棒球方块<strong>出局权重由 2 调为 1</strong>，方块面为 <code>OUT×1 / FOUL×1 / 1B×2 / 1B/?×1</code>（安打面合计 3/5）。因此好坏球打席整体安打率/出局率与普通模式一致（选 1B 均为 60% / 40%）。</div>
 
+      <h4 class="sub-h">投手风格（投球策略五档）</h4>
+      <p class="text">好坏球骰 6 面里各种骰面的张数由「投手风格」决定（滑杆自左→右 = 坏球 5→1）。对战由<strong>防守方</strong>在防守半局开始前选定，仅对方开启好坏球时生效；单人 / 挑战 / 无尽每局随机一档。</p>
+      <div class="table-wrap">
+        <table class="wiki-table">
+          <thead><tr><th>档位</th><th>骰面分布（红中/刁钻/擦边/偏出）</th><th>坏:好</th><th>定位</th></tr></thead>
+          <tbody>
+            <tr><td><strong>极偏坏</strong></td><td>0 / 1 / 1 / 4</td><td>5:1</td><td>极端保送向（滑杆最左标红「危险」）</td></tr>
+            <tr><td><strong>偏坏球</strong></td><td>1 / 1 / 1 / 3</td><td>4:2</td><td>保送向 · 惩罚乱打</td></tr>
+            <tr><td><strong>均衡</strong>（默认）</td><td>2 / 1 / 1 / 2</td><td>3:3</td><td>稳妥默认</td></tr>
+            <tr><td><strong>偏好球</strong></td><td>3 / 1 / 1 / 1</td><td>2:4</td><td>三振向 · 惩罚等球</td></tr>
+            <tr><td><strong>极偏好</strong></td><td>4 / 1 / 1 / 0</td><td>1:5</td><td>极端三振向</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4 class="sub-h">选择面板与限时</h4>
+      <ul class="list">
+        <li>我方防守的半局开始前弹出「选择投球策略」滑杆；开赛前由主队房主先选「先发投手」档位。</li>
+        <li>拖动实时预览档名与说明（拖到最左「极偏坏」红色警示）；点「<strong>确认</strong>」提交当前档、点「<strong>默认</strong>」按均衡，<strong>倒计时结束未操作自动按均衡</strong>。</li>
+        <li>限时：普通对战 vs AI 30 秒 / vs 真人 8 秒；大会场次统一 8 秒。</li>
+        <li>进攻方不展示面板，等待期显示「对方正在选择投球策略…」（vs AI 时显示「AI 正在思考投球策略…」）。</li>
+        <li>每个好坏球打席的结果下方会回显一行：<code>对方选择「打/看」· 骰面</code>（红中好球 / 刁钻好球 / 擦边坏球 / 偏出坏球），防守方与观众可见。</li>
+      </ul>
+
       <h3 class="block">4. 过关与失败</h3>
       <div class="table-wrap">
         <table class="wiki-table">
