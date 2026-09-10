@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2d5a3d"/>
+      <stop offset="1" stop-color="#255034"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+  <!-- 书封（厚度感，深色） -->
+  <path d="M32 21 C25 15.5 15 16 9 17.5 V44 C15 42.5 25 42 32 47.5 C39 42 49 42.5 55 44 V17.5 C49 16 39 15.5 32 21 Z" fill="#1f4230"/>
+  <!-- 翻开的书页 -->
+  <path d="M32 24 C26 19 18.5 19.5 13 21 V41.5 C18.5 40 26 39.5 32 44.5 C38 39.5 45.5 40 51 41.5 V21 C45.5 19.5 38 19 32 24 Z" fill="#ffffff"/>
+  <!-- 书脊 -->
+  <line x1="32" y1="24.5" x2="32" y2="44" stroke="#cfe3d4" stroke-width="1.6"/>
+  <!-- 左右页棒球缝线（棒球知识之书） -->
+  <path d="M17.5 26 Q23 32.5 17.5 39" stroke="#e5484d" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M46.5 26 Q41 32.5 46.5 39" stroke="#e5484d" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <g stroke="#e5484d" stroke-width="1.5" stroke-linecap="round">
+    <line x1="19.3" y1="28.7" x2="21" y2="29.8"/>
+    <line x1="18.8" y1="32.5" x2="20.6" y2="32.5"/>
+    <line x1="19.3" y1="36.3" x2="21" y2="35.2"/>
+    <line x1="44.7" y1="28.7" x2="43" y2="29.8"/>
+    <line x1="45.2" y1="32.5" x2="43.4" y2="32.5"/>
+    <line x1="44.7" y1="36.3" x2="43" y2="35.2"/>
+  </g>
+</svg>
