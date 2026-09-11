@@ -3,7 +3,7 @@
 set -e
 cd "$(dirname "$0")"
 
-PORT="${PORT:-8091}"
+PORT="${PORT:-8094}"
 PIDFILE=".server.pid"
 
 # 读取已保存的 PID（如果存在）
@@ -67,5 +67,5 @@ case "${1:-start}" in
   stop)     stop ;;
   restart)  restart ;;
   status)   status ;;
-  *)        echo "用法: ./run.sh {start|stop|restart|status}" >&2; exit 1 ;;
+  *)        echo "用法: ./run_local.sh {start|stop|restart|status}" >&2; exit 1 ;;
 esac

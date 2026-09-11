@@ -1,4 +1,4 @@
-# 本地预览服务运行时文件（run.sh 生成）
+# 本地预览服务运行时文件（run_local.sh 生成）
 .server.pid
 .server.log
 
